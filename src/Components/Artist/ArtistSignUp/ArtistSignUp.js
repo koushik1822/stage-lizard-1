@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import auth from "../../../firebase.config";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const ArtistSignUp = () => {
   const [artistName, setArtistName] = useState("");
   const [category, setCategory] = useState("solo");
@@ -11,7 +15,12 @@ const ArtistSignUp = () => {
   const [password, setPassword] = useState("");
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-
+  const [loggedUser, loggedLoading, loggedError] = useAuthState(auth);
+  let navigate = useNavigate();
+  let location = useLocation();
+  console.log(loggedUser);
+  let from = location.state?.from?.pathname || "/";
+  console.log(user);
   if (error) {
     return (
       <div>
@@ -22,12 +31,9 @@ const ArtistSignUp = () => {
   if (loading) {
     return <p>Loading...</p>;
   }
-  if (user) {
-    return (
-      <div>
-        <p>Registered User: {user.user.email}</p>
-      </div>
-    );
+
+  if (loggedUser) {
+    navigate("/artist-dashboard");
   }
   const handleAdditionalGenreSelect = (selectedGenre) => {
     if (!additionalGenres.includes(selectedGenre)) {
@@ -50,6 +56,8 @@ const ArtistSignUp = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(email, password);
+      navigate(from, { replace: true });
+
       console.log("User signed up successfully!");
     } catch (error) {
       console.error("Error signing up:", error.message);
@@ -226,6 +234,13 @@ const ArtistSignUp = () => {
           >
             Sign Up
           </button>
+          <p className="mt-4">
+            ALready have an account?{" "}
+            <Link to="/artist-login" className="text-blue-500">
+              Login Here
+            </Link>
+            .
+          </p>
         </form>
       </div>
     </div>
