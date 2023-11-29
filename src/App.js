@@ -59,16 +59,7 @@ function App() {
               </RequireAuthOrganizer>
             }
           ></Route>
-          <Route
-            path="second-question"
-            element={
-              <RequireAuthOrganizer>
-                <QuestionContextProvider>
-                  <SecondQuestion></SecondQuestion>
-                </QuestionContextProvider>
-              </RequireAuthOrganizer>
-            }
-          ></Route>
+          
         </Route>
       </Routes>
     </>

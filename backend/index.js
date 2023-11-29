@@ -8,6 +8,7 @@ const dbConnect = require("./utils/dbConnect");
 const artistRouter = require("./routes/artist.routes");
 const organizerRouter = require("./routes/organizer.routes");
 const questionRouter = require("./routes/question.routes");
+const eventRouter = require("./routes/event.routes");
 require("dotenv").config();
 
 // Middleware to enable CORS
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use("/artist", artistRouter);
 app.use("/organizer", organizerRouter);
 app.use("/question", questionRouter);
-
+app.use("/event", eventRouter);
 dbConnect();
 // Simple route
 app.get("/", (req, res) => {

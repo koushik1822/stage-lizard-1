@@ -1,13 +1,24 @@
 // ArtistHeader.js
 
-import React, { useState } from "react";
-import { useSignOut } from "react-firebase-hooks/auth";
+import React, { useEffect, useState } from "react";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.config";
+import axios from "axios";
 
 const OrganizerHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [signOut, loading, error] = useSignOut(auth);
+  const [user, loggedLoading, loggedError] = useAuthState(auth);
+  const [organizerDetails, setOrganizerDetails] = useState();
+  useEffect(() => {
+    const findOrganizer = async () => {
+      await axios(`/organizer/${user.email}`).then((data) =>
+        setOrganizerDetails(data.data)
+      );
+    };
+    findOrganizer();
+  }, [user]);
   const navigate = useNavigate();
   if (error) {
     return (
@@ -31,7 +42,7 @@ const OrganizerHeader = () => {
         </Link>
 
         <nav className="space-x-4">
-          <Link to="/dashboard" className="text-white">
+          <Link to="/organizer-dashboard" className="text-white">
             Dashboard
           </Link>
           <Link to="/portfolio" className="text-white">
@@ -50,7 +61,9 @@ const OrganizerHeader = () => {
             onClick={toggleDropdown}
             className="flex items-center text-white focus:outline-none"
           >
-            <span className="mr-2">Artist Name</span>
+            {organizerDetails && (
+              <span className="mr-2">{organizerDetails?.name}</span>
+            )}
             <svg
               className={`h-6 w-6 ${
                 isDropdownOpen ? "transform rotate-180" : ""

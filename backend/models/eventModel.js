@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const eventSchema = new mongoose.Schema(
   {
     questions: {
-      type: [{}],
+      type: [],
       required: true,
     },
     eventName: {
@@ -23,6 +23,10 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
     cityLocation: {
+      type: String,
+      required: true,
+    },
+    user: {
       type: String,
       required: true,
     },

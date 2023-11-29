@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import QuestionContext from "../QuestionContext/QuestionContext";
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const FirstQuestion = () => {
   const [firstQuestion, setFirstQuestion] = useState();
   const { data, setData } = useContext(QuestionContext);
@@ -12,18 +15,29 @@ const FirstQuestion = () => {
   const [applicationDeadline, setApplicationDeadline] = useState("");
   const [description, setDescription] = useState("");
   const [cityLocation, setCityLocation] = useState("");
-
-  const handleSubmit = (e) => {
+  const [user, loading, error] = useAuthState(auth);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const body = {
+      questions: data,
+      eventName: eventName,
+      eventDate: eventDate,
+      applicationDeadline: applicationDeadline,
+      eventDescription: description,
+      cityLocation: cityLocation,
+      user: user.email,
+    };
+    axios
+      .post("/event", body)
+      .then((data) => {
+        console.log(data);
+        toast("successfully posted");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast("something wrong");
+      });
     // Implement your form submission logic here
-    console.log("Form submitted:", {
-      eventName,
-      eventDate,
-      applicationDeadline,
-      description,
-      cityLocation,
-    });
   };
 
   console.log(option);
@@ -184,6 +198,7 @@ const FirstQuestion = () => {
           </form>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
