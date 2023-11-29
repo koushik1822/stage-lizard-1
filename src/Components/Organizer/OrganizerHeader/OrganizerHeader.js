@@ -1,22 +1,13 @@
 // ArtistHeader.js
 
-import React, { useEffect, useState } from "react";
-import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
+import React, { useState } from "react";
+import { useSignOut } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.config";
-import axios from "axios";
 
-const ArtistHeader = () => {
+const OrganizerHeader = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [signOut, loading, error] = useSignOut(auth);
-  const [user, loggedLoading, loggedError] = useAuthState(auth);
-  const [userDetails, setUserDetails] = useState(null);
-  useEffect(() => {
-    axios
-      .get(`/artist/${user?.email}`)
-      .then((data) => setUserDetails(data.data))
-      .catch((err) => console.log(err));
-  }, [user]);
   const navigate = useNavigate();
   if (error) {
     return (
@@ -36,7 +27,7 @@ const ArtistHeader = () => {
     <header className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-white text-lg font-bold">
-          Stage Lizard
+          Stage Lizard Organizer
         </Link>
 
         <nav className="space-x-4">
@@ -59,7 +50,7 @@ const ArtistHeader = () => {
             onClick={toggleDropdown}
             className="flex items-center text-white focus:outline-none"
           >
-            {userDetails && <span className="mr-2">{userDetails?.name}</span>}
+            <span className="mr-2">Artist Name</span>
             <svg
               className={`h-6 w-6 ${
                 isDropdownOpen ? "transform rotate-180" : ""
@@ -112,4 +103,4 @@ const ArtistHeader = () => {
   );
 };
 
-export default ArtistHeader;
+export default OrganizerHeader;

@@ -15,7 +15,12 @@ const Homepage = () => {
           <p className="text-lg">Explore and discover amazing things!</p>
           <Link to="/artist-signup">
             <button className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 focus:outline-none focus:shadow-outline-yellow my-2">
-              Sign Up As Artist
+              Sign Up As Artist/Band
+            </button>
+          </Link>
+          <Link to="/organizer-signup">
+            <button className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 focus:outline-none focus:shadow-outline-yellow my-2 mx-2">
+              Sign Up As Organizer
             </button>
           </Link>
         </div>

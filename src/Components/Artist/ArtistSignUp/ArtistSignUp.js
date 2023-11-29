@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.config";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 const ArtistSignUp = () => {
   const [artistName, setArtistName] = useState("");
   const [category, setCategory] = useState("solo");
@@ -18,9 +19,28 @@ const ArtistSignUp = () => {
   const [loggedUser, loggedLoading, loggedError] = useAuthState(auth);
   let navigate = useNavigate();
   let location = useLocation();
-  console.log(loggedUser);
+  const [organizer, setOrganizer] = useState();
+  const [foundOrganizer, setFoundOrganizer] = useState(false);
+
+  useEffect(() => {
+    const organizerFetch = async () => {
+      console.log(email);
+      await axios
+        .get(`/organizer/${email}`)
+        .then((data) => {
+          setOrganizer(data?.data);
+          setFoundOrganizer(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setFoundOrganizer(false);
+        });
+    };
+
+    organizerFetch();
+  }, [email]);
   let from = location.state?.from?.pathname || "/";
-  console.log(user);
+
   if (error) {
     return (
       <div>
@@ -31,9 +51,21 @@ const ArtistSignUp = () => {
   if (loading) {
     return <p>Loading...</p>;
   }
-
+  if (loggedLoading) {
+    return <p>Registering</p>;
+  }
   if (loggedUser) {
-    navigate("/artist-dashboard");
+    console.log(loggedUser.email);
+    const artistFinder = async () => {
+      await axios
+        .get(`/artist/${loggedUser.email}`)
+        .then((data) => navigate("/artist-dashboard"))
+        .catch((err) => {
+          navigate("/organizer-dashboard");
+          console.log(err);
+        });
+    };
+    artistFinder();
   }
   const handleAdditionalGenreSelect = (selectedGenre) => {
     if (!additionalGenres.includes(selectedGenre)) {
@@ -55,8 +87,19 @@ const ArtistSignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(email, password);
-      navigate(from, { replace: true });
+      const response = await createUserWithEmailAndPassword(email, password);
+      if (response.user.email) {
+        await axios.post("/artist/artist-signup", {
+          name: artistName,
+          email: email,
+          role: "artist",
+          category: category,
+          primaryMusicGenre: primaryGenre,
+          additionalMusicGenres: additionalGenres,
+          city: city,
+        });
+        navigate("/artist-dashboard");
+      }
 
       console.log("User signed up successfully!");
     } catch (error) {
@@ -231,6 +274,7 @@ const ArtistSignUp = () => {
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
             type="submit"
+            disabled={foundOrganizer && true}
           >
             Sign Up
           </button>
@@ -241,6 +285,9 @@ const ArtistSignUp = () => {
             </Link>
             .
           </p>
+          <div className="found-organizer">
+            {foundOrganizer && "This email is for an organizer"}
+          </div>
         </form>
       </div>
     </div>

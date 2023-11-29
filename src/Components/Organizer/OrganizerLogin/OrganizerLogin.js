@@ -9,7 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.config";
 import axios from "axios";
 
-const ArtistLogin = () => {
+const OrganizerLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedUser, loggedLoading, loggedError] = useAuthState(auth);
@@ -19,21 +19,21 @@ const ArtistLogin = () => {
   let location = useLocation();
   console.log(loggedUser);
   let from = location.state?.from?.pathname || "/";
-  const [organizer, setOrganizer] = useState();
-  const [foundOrganizer, setFoundOrganizer] = useState(false);
+  const [artist, setArtist] = useState();
+  const [foundArtist, setFoundArtist] = useState(false);
 
   useEffect(() => {
     const organizerFetch = async () => {
       console.log(email);
       await axios
-        .get(`/organizer/${email}`)
+        .get(`/artist/${email}`)
         .then((data) => {
-          setOrganizer(data?.data);
-          setFoundOrganizer(true);
+          setArtist(data?.data);
+          setFoundArtist(true);
         })
         .catch((error) => {
           console.log(error);
-          setFoundOrganizer(false);
+          setFoundArtist(false);
         });
     };
 
@@ -53,8 +53,9 @@ const ArtistLogin = () => {
     return <p>Logging In</p>;
   }
   if (loggedUser) {
-    navigate("/artist-dashboard");
+    navigate("/organizer-dashboard");
   }
+
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(email, password);
@@ -103,11 +104,11 @@ const ArtistLogin = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {foundOrganizer && <p>This email is associated to an organizer</p>}
+        {foundArtist && <p>This email is associated to an artist</p>}
         <button
           type="button"
           onClick={handleLogin}
-          disabled={foundOrganizer && true}
+          disabled={foundArtist && true}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
         >
           Log In
@@ -115,7 +116,7 @@ const ArtistLogin = () => {
 
         <p className="mt-4">
           Don't have an account?{" "}
-          <Link to="/artist-signup" className="text-blue-500">
+          <Link to="/organizer-signup" className="text-blue-500">
             Sign up here
           </Link>
           .
@@ -125,4 +126,4 @@ const ArtistLogin = () => {
   );
 };
 
-export default ArtistLogin;
+export default OrganizerLogin;
