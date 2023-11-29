@@ -27,7 +27,7 @@ module.exports.organizerFindService = async (req, res) => {
     if (foundOrganizer) {
       await res.status(200).json(foundOrganizer);
     } else {
-      res.status(400).json("not found");
+      //   res.status(404).json("not found");
     }
   } catch (error) {
     console.log(error);
