@@ -48,7 +48,10 @@ const OrganizerHeader = () => {
           <Link to="/portfolio" className="text-white">
             Portfolio
           </Link>
-          <Link to="/events" className="text-white">
+          <Link
+            to="/organizer-dashboard/organizer-event"
+            className="text-white"
+          >
             Events
           </Link>
           <Link to="/messages" className="text-white">
@@ -85,7 +88,7 @@ const OrganizerHeader = () => {
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
               <Link
-                to="/profile"
+                to="/organizer-dashboard/organizer-profile"
                 className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
               >
                 Profile

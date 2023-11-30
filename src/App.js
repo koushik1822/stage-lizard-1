@@ -14,6 +14,8 @@ import RequireAuthOrganizer from "./Components/RequireAuth/RequireAuthOrganizer"
 import FirstQuestion from "./Components/Organizer/FirstQuestion/FirstQuestion";
 import QuestionContextProvider from "./Components/Organizer/QuestionContext/QuestionContextProvider";
 import SecondQuestion from "./Components/Organizer/SecondQuestion/SecondQuestion";
+import OrganizerEvent from "./Components/Organizer/OrganizerEvent/OrganizerEvent";
+import OrganizerProfile from "./Components/Organizer/OrganizerProfile/OrganizerProfile";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8080/";
@@ -59,7 +61,22 @@ function App() {
               </RequireAuthOrganizer>
             }
           ></Route>
-          
+          <Route
+            path="organizer-event"
+            element={
+              <RequireAuthOrganizer>
+                <OrganizerEvent></OrganizerEvent>
+              </RequireAuthOrganizer>
+            }
+          ></Route>
+          <Route
+            path="organizer-profile"
+            element={
+              <RequireAuthOrganizer>
+                <OrganizerProfile></OrganizerProfile>
+              </RequireAuthOrganizer>
+            }
+          ></Route>
         </Route>
       </Routes>
     </>

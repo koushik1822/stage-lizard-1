@@ -23,12 +23,27 @@ module.exports.organizerFindService = async (req, res) => {
   const { email } = req.params;
   try {
     const foundOrganizer = await organizerModel.findOne({ email: email });
-
+    console.log(foundOrganizer);
     if (foundOrganizer) {
       await res.status(200).json(foundOrganizer);
     } else {
       //   res.status(404).json("not found");
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.organizerUpdateService = async (req, res) => {
+  const { email } = req.params;
+  const body = req.body;
+
+  try {
+    const result = await organizerModel.updateOne(
+      { email: email },
+      { $set: body }
+    );
+    res.status(200).json(result);
   } catch (error) {
     console.log(error);
   }

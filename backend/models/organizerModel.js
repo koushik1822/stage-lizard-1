@@ -11,6 +11,9 @@ const organizerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+  },
 });
 
 const organizerModel = mongoose.model("Organizer", organizerSchema);
