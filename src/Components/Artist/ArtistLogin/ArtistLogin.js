@@ -28,8 +28,13 @@ const ArtistLogin = () => {
       await axios
         .get(`/organizer/${email}`)
         .then((data) => {
-          setOrganizer(data?.data);
-          setFoundOrganizer(true);
+          if (data?.data) {
+            setOrganizer(data?.data);
+            setFoundOrganizer(true);
+          }
+          if (data?.data == "not found") {
+            setFoundOrganizer(false);
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -107,7 +112,7 @@ const ArtistLogin = () => {
         <button
           type="button"
           onClick={handleLogin}
-          disabled={foundOrganizer && true}
+          disabled={foundOrganizer ? true : false}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
         >
           Log In

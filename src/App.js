@@ -16,6 +16,11 @@ import QuestionContextProvider from "./Components/Organizer/QuestionContext/Ques
 import SecondQuestion from "./Components/Organizer/SecondQuestion/SecondQuestion";
 import OrganizerEvent from "./Components/Organizer/OrganizerEvent/OrganizerEvent";
 import OrganizerProfile from "./Components/Organizer/OrganizerProfile/OrganizerProfile";
+import Gig from "./Components/Organizer/Gig/Gig";
+import OrganizerGig from "./Components/Organizer/OrganizerGig/OrganizerGig";
+import ArtistEvent from "./Components/Artist/ArtistEvent/ArtistEvent";
+import ArtistSingleEvent from "./Components/Artist/ArtistSingleEvent/ArtistSingleEvent";
+import ArtistBookedEvent from "./Components/Artist/ArtistBookedEvent/ArtistBookedEvent";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8080/";
@@ -41,6 +46,32 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route
+          path="/artist-event"
+          element={
+            <RequireAuth>
+              <ArtistEvent></ArtistEvent>
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/booked-event"
+          element={
+            <RequireAuth>
+              <ArtistBookedEvent></ArtistBookedEvent>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/artist-event/:id"
+          element={
+            <RequireAuth>
+              <ArtistSingleEvent></ArtistSingleEvent>
+            </RequireAuth>
+          }
+        />
+
         <Route
           path="/organizer-dashboard"
           element={
@@ -74,6 +105,22 @@ function App() {
             element={
               <RequireAuthOrganizer>
                 <OrganizerProfile></OrganizerProfile>
+              </RequireAuthOrganizer>
+            }
+          ></Route>
+          <Route
+            path="organizer-gig"
+            element={
+              <RequireAuthOrganizer>
+                <Gig></Gig>
+              </RequireAuthOrganizer>
+            }
+          ></Route>
+          <Route
+            path="gig"
+            element={
+              <RequireAuthOrganizer>
+                <OrganizerGig></OrganizerGig>
               </RequireAuthOrganizer>
             }
           ></Route>

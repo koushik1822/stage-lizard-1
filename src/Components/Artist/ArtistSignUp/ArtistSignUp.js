@@ -28,12 +28,17 @@ const ArtistSignUp = () => {
       await axios
         .get(`/organizer/${email}`)
         .then((data) => {
-          setOrganizer(data?.data);
-          setFoundOrganizer(true);
+          console.log(data.data);
+          if (data.data == "not found") {
+            setFoundOrganizer(false);
+          }
+          if (data.data !== "not found") {
+            setOrganizer(data?.data);
+            setFoundOrganizer(true);
+          }
         })
         .catch((error) => {
           console.log(error);
-          setFoundOrganizer(false);
         });
     };
 
@@ -141,7 +146,7 @@ const ArtistSignUp = () => {
               type="email"
               id="email"
               placeholder="Enter your email"
-              value={email}
+              // value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -274,7 +279,7 @@ const ArtistSignUp = () => {
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
             type="submit"
-            disabled={foundOrganizer && true}
+            disabled={foundOrganizer ? true : false}
           >
             Sign Up
           </button>

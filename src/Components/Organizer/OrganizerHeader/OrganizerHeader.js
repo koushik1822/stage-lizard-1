@@ -45,8 +45,8 @@ const OrganizerHeader = () => {
           <Link to="/organizer-dashboard" className="text-white">
             Dashboard
           </Link>
-          <Link to="/portfolio" className="text-white">
-            Portfolio
+          <Link to="/organizer-dashboard/organizer-gig" className="text-white">
+            Create Gig
           </Link>
           <Link
             to="/organizer-dashboard/organizer-event"
@@ -54,8 +54,8 @@ const OrganizerHeader = () => {
           >
             Events
           </Link>
-          <Link to="/messages" className="text-white">
-            Messages
+          <Link to="/organizer-dashboard/gig" className="text-white">
+            Published Gigs
           </Link>
         </nav>
 

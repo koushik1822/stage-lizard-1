@@ -9,6 +9,8 @@ const artistRouter = require("./routes/artist.routes");
 const organizerRouter = require("./routes/organizer.routes");
 const questionRouter = require("./routes/question.routes");
 const eventRouter = require("./routes/event.routes");
+const gigRouter = require("./routes/gig.routes");
+const bookRouter = require("./routes/book.routes");
 require("dotenv").config();
 
 // Middleware to enable CORS
@@ -21,6 +23,8 @@ app.use("/artist", artistRouter);
 app.use("/organizer", organizerRouter);
 app.use("/question", questionRouter);
 app.use("/event", eventRouter);
+app.use("/gig", gigRouter);
+app.use("/book", bookRouter);
 dbConnect();
 // Simple route
 app.get("/", (req, res) => {

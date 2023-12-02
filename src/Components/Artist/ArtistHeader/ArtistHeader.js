@@ -36,7 +36,7 @@ const ArtistHeader = () => {
     <header className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-white text-lg font-bold">
-          Stage Lizard
+          Stage Lizard Artist
         </Link>
 
         <nav className="space-x-4">
@@ -46,11 +46,11 @@ const ArtistHeader = () => {
           <Link to="/portfolio" className="text-white">
             Portfolio
           </Link>
-          <Link to="/events" className="text-white">
+          <Link to="/artist-event" className="text-white">
             Events
           </Link>
-          <Link to="/messages" className="text-white">
-            Messages
+          <Link to="/booked-event" className="text-white">
+            Booked Events
           </Link>
         </nav>
 
