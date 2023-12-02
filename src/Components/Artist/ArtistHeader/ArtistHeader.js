@@ -40,12 +40,6 @@ const ArtistHeader = () => {
         </Link>
 
         <nav className="space-x-4">
-          <Link to="/dashboard" className="text-white">
-            Dashboard
-          </Link>
-          <Link to="/portfolio" className="text-white">
-            Portfolio
-          </Link>
           <Link to="/artist-event" className="text-white">
             Events
           </Link>

@@ -48,9 +48,13 @@ const OrganizerSignUp = () => {
     const organizerFinder = async () => {
       await axios
         .get(`/organizer/${loggedUser.email}`)
-        .then((data) => navigate("/organizer-dashboard"))
+        .then((data) => {
+          console.log(data);
+          if (data.data == "not found") {
+            navigate("/artist-dashboard");
+          } else navigate("/organizer-dashboard");
+        })
         .catch((err) => {
-          navigate("/artist-dashboard");
           console.log(err);
         });
     };
