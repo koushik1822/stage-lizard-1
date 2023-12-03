@@ -23,7 +23,7 @@ import ArtistSingleEvent from "./Components/Artist/ArtistSingleEvent/ArtistSingl
 import ArtistBookedEvent from "./Components/Artist/ArtistBookedEvent/ArtistBookedEvent";
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:8080/";
+  axios.defaults.baseURL = "https://stage-lizard.onrender.com/";
   return (
     <>
       <Routes>
