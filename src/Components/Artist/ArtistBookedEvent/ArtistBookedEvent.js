@@ -16,8 +16,12 @@ const ArtistBookedEvent = () => {
         .get(`/book/${user.email}`)
         .then((data) => {
           console.log(data.data);
-          setBookedEvents(data.data[0]);
-          setBookedEventDetails(data.data[1]);
+          if (data.data !== "no booking found") {
+            setBookedEvents(data.data[0]);
+            setBookedEventDetails(data.data[1]);
+          } else {
+            setBookedEventDetails("no data");
+          }
         })
         .catch((err) => console.log(err));
     };
@@ -44,42 +48,54 @@ const ArtistBookedEvent = () => {
   return (
     <div>
       <ArtistHeader></ArtistHeader>
-      {bookedEventDetails?.length > 0 && (
-        <div className="container mx-auto mt-10">
-          <h2 className="text-3xl font-bold mb-4">Event Table</h2>
-          <table className="min-w-full bg-white border border-gray-300">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 border-b">Event Name</th>
-                <th className="py-2 px-4 border-b">Event Location</th>
-                <th className="py-2 px-4 border-b">Event Description</th>
-                <th className="py-2 px-4 border-b">Event Date</th>
-                <th className="py-2 px-4 border-b">Event Host</th>
-                <th className="py-2 px-4 border-b">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookedEventDetails.map((event, index) => (
-                <tr key={index}>
-                  <td className="py-2 px-4 border-b">{event.eventName}</td>
-                  <td className="py-2 px-4 border-b">{event.cityLocation}</td>
-                  <td className="py-2 px-4 border-b">
-                    {event.eventDescription}
-                  </td>
-                  <td className="py-2 px-4 border-b">{event.eventDate}</td>
-                  <td className="py-2 px-4 border-b">{event.user}</td>
-                  <td className="py-2 px-4 border-b">
-                    <button
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline-red"
-                      onClick={() => onDelete(event._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {bookedEventDetails !== "no data" && (
+        <div>
+          {" "}
+          {bookedEventDetails?.length > 0 && (
+            <div className="container mx-auto mt-10">
+              <h2 className="text-3xl font-bold mb-4">Event Table</h2>
+              <table className="min-w-full bg-white border border-gray-300">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4 border-b">Event Name</th>
+                    <th className="py-2 px-4 border-b">Event Location</th>
+                    <th className="py-2 px-4 border-b">Event Description</th>
+                    <th className="py-2 px-4 border-b">Event Date</th>
+                    <th className="py-2 px-4 border-b">Event Host</th>
+                    <th className="py-2 px-4 border-b">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bookedEventDetails.map((event, index) => (
+                    <tr key={index}>
+                      <td className="py-2 px-4 border-b">{event.eventName}</td>
+                      <td className="py-2 px-4 border-b">
+                        {event.cityLocation}
+                      </td>
+                      <td className="py-2 px-4 border-b">
+                        {event.eventDescription}
+                      </td>
+                      <td className="py-2 px-4 border-b">{event.eventDate}</td>
+                      <td className="py-2 px-4 border-b">{event.user}</td>
+                      <td className="py-2 px-4 border-b">
+                        <button
+                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline-red"
+                          onClick={() => onDelete(event._id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
+      {bookedEventDetails == "no data" && (
+        <div className="flex justify-center items-center h-screen text-3xl">
+          No Booked Events
         </div>
       )}
       <ToastContainer />
