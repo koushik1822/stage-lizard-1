@@ -54,6 +54,23 @@ module.exports.eventDeleteService = async (req, res) => {
     console.log(error);
   }
 };
+module.exports.eventEditService = async (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+
+  try {
+    const update = await eventModel.findByIdAndUpdate(
+      id,
+      body
+      // { new: true }
+    );
+    if (update?.eventName) {
+      res.json("edited");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports.eventMultipleFindService = async (req, res) => {
   const { city } = req.params;

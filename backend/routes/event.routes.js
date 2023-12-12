@@ -7,6 +7,7 @@ const {
   eventSingleFindController,
   eventMultipleFindController,
   getEventsByDifferenceController,
+  eventEditController,
 } = require("../controller/event.controllers");
 const eventRouter = express.Router();
 
@@ -25,6 +26,9 @@ eventRouter.get("/:email", (req, res) => {
 
 eventRouter.delete("/delete/:id", (req, res) => {
   eventDeleteController(req, res);
+});
+eventRouter.put("/edit/:id", (req, res) => {
+  eventEditController(req, res);
 });
 
 eventRouter.route("/single-event/:id").get((req, res) => {

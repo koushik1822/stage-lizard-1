@@ -6,6 +6,7 @@ const {
   eventSingleFindService,
   eventMultipleFindService,
   getEventsByDifferenceService,
+  eventEditService,
 } = require("../services/event.services");
 
 module.exports.eventCreateController = (req, res) => {
@@ -22,6 +23,9 @@ module.exports.eventAllFIndController = (req, res) => {
 
 module.exports.eventDeleteController = (req, res) => {
   eventDeleteService(req, res);
+};
+module.exports.eventEditController = (req, res) => {
+  eventEditService(req, res);
 };
 
 module.exports.eventSingleFindController = (req, res) => {

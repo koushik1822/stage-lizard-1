@@ -15,7 +15,7 @@ const FirstQuestion = () => {
   const [eventStartTime, setEventStartTime] = useState("");
   const [eventEndTime, setEventEndTime] = useState("");
   const [applicationDeadline, setApplicationDeadline] = useState("");
-  const [description, setDescription] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
   const [cityLocation, setCityLocation] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const handleSubmit = async (e) => {
@@ -27,7 +27,7 @@ const FirstQuestion = () => {
       eventStartTime: eventStartTime,
       eventEndTime: eventEndTime,
       applicationDeadline: applicationDeadline,
-      eventDescription: description,
+      eventDescription: eventDescription,
       cityLocation: cityLocation,
       user: user.email,
     };
@@ -200,8 +200,8 @@ const FirstQuestion = () => {
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                 id="description"
                 placeholder="Enter event description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={eventDescription}
+                onChange={(e) => setEventDescription(e.target.value)}
                 required
               />
             </div>
