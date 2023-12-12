@@ -14,6 +14,14 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    eventStartTime:{
+      type:String,
+      required:true
+    },
+    eventEndTime:{
+      type:String,
+      required:true
+    },
     applicationDeadline: {
       type: String,
       required: true,

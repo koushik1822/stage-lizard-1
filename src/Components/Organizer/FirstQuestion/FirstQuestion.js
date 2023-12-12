@@ -24,6 +24,8 @@ const FirstQuestion = () => {
       questions: data,
       eventName: eventName,
       eventDate: eventDate,
+      eventStartTime: eventStartTime,
+      eventEndTime: eventEndTime,
       applicationDeadline: applicationDeadline,
       eventDescription: description,
       cityLocation: cityLocation,
@@ -87,18 +89,17 @@ const FirstQuestion = () => {
           </div>
         ))}
       {count <= 3 && (
-        <p className="bg-green-400 inline-block py-2 px-20 rounded-xl text-2xl ">
-          <button
-            onClick={() => {
-              if (count <= 3) {
-                setCount(count + 1);
-                console.log(count);
-              }
-            }}
-          >
-            Next
-          </button>
-        </p>
+        <button
+          className="bg-green-400 inline-block py-2 px-20 rounded-xl text-2xl "
+          onClick={() => {
+            if (count <= 3) {
+              setCount(count + 1);
+              console.log(count);
+            }
+          }}
+        >
+          Next
+        </button>
       )}
       {count > 3 && (
         <div className="container mx-auto mt-10">
@@ -147,10 +148,26 @@ const FirstQuestion = () => {
               </label>
               <input
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-                type="date"
-                id="eventDate"
-                value={eventDate}
-                onChange={(e) => setEventDate(e.target.value)}
+                type="time"
+                id="eventStartTime"
+                value={eventStartTime}
+                onChange={(e) => setEventStartTime(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="eventEndTime"
+              >
+                Event End Time
+              </label>
+              <input
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                type="time"
+                id="eventEndTime"
+                value={eventEndTime}
+                onChange={(e) => setEventEndTime(e.target.value)}
                 required
               />
             </div>

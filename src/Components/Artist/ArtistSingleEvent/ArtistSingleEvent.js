@@ -61,6 +61,10 @@ const ArtistSingleEvent = () => {
                   <strong>Date:</strong> {eventDetails?.eventDate}
                 </p>
                 <p className="text-gray-700 text-base mb-2">
+                  <strong>Event Time:</strong> {eventDetails?.eventStartTime}-
+                  {eventDetails?.eventEndTime}
+                </p>
+                <p className="text-gray-700 text-base mb-2">
                   <strong>Application Deadline:</strong>{" "}
                   {eventDetails?.applicationDeadline}
                 </p>
