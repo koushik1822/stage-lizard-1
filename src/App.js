@@ -25,7 +25,7 @@ import ArtistProfile from "./Components/Artist/ArtistProfile/ArtistProfile";
 import OrganizerBookedArtist from "./Components/Organizer/OrganizerBookedArtist/OrganizerBookedArtist";
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:8080/";
+  axios.defaults.baseURL = "https://stage-lizard.onrender.com/";
   return (
     <>
       <Routes>
@@ -139,9 +139,7 @@ function App() {
           path="/organizer-booked-artist"
           element={
             <RequireAuthOrganizer>
-              
-                <OrganizerBookedArtist></OrganizerBookedArtist>
-              
+              <OrganizerBookedArtist></OrganizerBookedArtist>
             </RequireAuthOrganizer>
           }
         />
