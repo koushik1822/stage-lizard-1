@@ -5,6 +5,7 @@ const {
   organizerSignUpController,
   organizerFindController,
   organizerUpdateController,
+  organizerBookedArtistController,
 } = require("../controller/organizer.controllers");
 const organizerRouter = express.Router();
 
@@ -20,5 +21,7 @@ organizerRouter
   .put("/:email", (req, res) => {
     organizerUpdateController(req, res);
   });
-
+organizerRouter.route("/booked-artist/:email").get((req, res) => {
+  organizerBookedArtistController(req, res);
+});
 module.exports = organizerRouter;

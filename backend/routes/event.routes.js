@@ -5,6 +5,8 @@ const {
   eventDeleteController,
   eventAllFIndController,
   eventSingleFindController,
+  eventMultipleFindController,
+  getEventsByDifferenceController,
 } = require("../controller/event.controllers");
 const eventRouter = express.Router();
 
@@ -28,4 +30,11 @@ eventRouter.delete("/delete/:id", (req, res) => {
 eventRouter.route("/single-event/:id").get((req, res) => {
   eventSingleFindController(req, res);
 });
+eventRouter.route("/multiple-event/:city").get((req, res) => {
+  eventMultipleFindController(req, res);
+});
+eventRouter.route("/event-difference/:difference").get((req, res) => {
+  getEventsByDifferenceController(req, res);
+});
+
 module.exports = eventRouter;

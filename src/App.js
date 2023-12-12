@@ -21,9 +21,11 @@ import OrganizerGig from "./Components/Organizer/OrganizerGig/OrganizerGig";
 import ArtistEvent from "./Components/Artist/ArtistEvent/ArtistEvent";
 import ArtistSingleEvent from "./Components/Artist/ArtistSingleEvent/ArtistSingleEvent";
 import ArtistBookedEvent from "./Components/Artist/ArtistBookedEvent/ArtistBookedEvent";
+import ArtistProfile from "./Components/Artist/ArtistProfile/ArtistProfile";
+import OrganizerBookedArtist from "./Components/Organizer/OrganizerBookedArtist/OrganizerBookedArtist";
 
 function App() {
-  axios.defaults.baseURL = "https://stage-lizard.onrender.com/";
+  axios.defaults.baseURL = "http://localhost:8080/";
   return (
     <>
       <Routes>
@@ -51,6 +53,14 @@ function App() {
           element={
             <RequireAuth>
               <ArtistEvent></ArtistEvent>
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/artist-profile"
+          element={
+            <RequireAuth>
+              <ArtistProfile></ArtistProfile>
             </RequireAuth>
           }
         />
@@ -125,6 +135,16 @@ function App() {
             }
           ></Route>
         </Route>
+        <Route
+          path="/organizer-booked-artist"
+          element={
+            <RequireAuthOrganizer>
+              
+                <OrganizerBookedArtist></OrganizerBookedArtist>
+              
+            </RequireAuthOrganizer>
+          }
+        />
       </Routes>
     </>
   );

@@ -30,7 +30,7 @@ const OrganizerEvent = () => {
     };
     fetchEvent();
   }, [user, deleteStatus]);
-  console.log(event);
+
   if (loading) {
     return (
       <div>

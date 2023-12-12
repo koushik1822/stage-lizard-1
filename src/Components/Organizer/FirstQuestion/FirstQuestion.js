@@ -12,6 +12,8 @@ const FirstQuestion = () => {
   const [option, setOption] = useState();
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
+  const [eventStartTime, setEventStartTime] = useState("");
+  const [eventEndTime, setEventEndTime] = useState("");
   const [applicationDeadline, setApplicationDeadline] = useState("");
   const [description, setDescription] = useState("");
   const [cityLocation, setCityLocation] = useState("");
@@ -126,6 +128,22 @@ const FirstQuestion = () => {
                 htmlFor="eventDate"
               >
                 Event Date
+              </label>
+              <input
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                type="date"
+                id="eventDate"
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="eventStartTime"
+              >
+                Event Start Time
               </label>
               <input
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"

@@ -18,14 +18,33 @@ module.exports.artistSignUpService = async (req, res) => {
 module.exports.artistFindService = async (req, res) => {
   // console.log(req.params);
   const { email } = req.params;
+  // console.log(email);
   try {
     const foundArtist = await artistModel.findOne({ email: email });
-   
+    // console.log(foundArtist);
     if (foundArtist) {
-      await res.status(200).json(foundArtist);
+      console.log(foundArtist);
+      res.status(200).json(foundArtist);
     } else {
       res.status(400).json("not found");
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//update artist
+
+module.exports.artistUpdateService = async (req, res) => {
+  const { email } = req.params;
+  const body = req.body;
+
+  try {
+    const result = await artistModel.updateOne(
+      { email: email },
+      { $set: body }
+    );
+    res.status(200).json(result);
   } catch (error) {
     console.log(error);
   }

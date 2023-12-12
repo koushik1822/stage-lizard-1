@@ -2,6 +2,7 @@ const {
   organizerSignUpService,
   organizerFindService,
   organizerUpdateService,
+  bookedArtistService,
 } = require("../services/organizer.services");
 
 module.exports.organizerSignUpController = (req, res) => {
@@ -13,4 +14,8 @@ module.exports.organizerFindController = (req, res) => {
 };
 module.exports.organizerUpdateController = (req, res) => {
   organizerUpdateService(req, res);
+};
+
+module.exports.organizerBookedArtistController = (req, res) => {
+  bookedArtistService(req, res);
 };
