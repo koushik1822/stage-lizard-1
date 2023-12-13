@@ -1,3 +1,8 @@
+// The main function where we are basically making Routes
+// Admin: Koushik
+// Please if you have any questions let me know on my email
+
+
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Router, Routes } from "react-router-dom";
@@ -23,6 +28,8 @@ import ArtistSingleEvent from "./Components/Artist/ArtistSingleEvent/ArtistSingl
 import ArtistBookedEvent from "./Components/Artist/ArtistBookedEvent/ArtistBookedEvent";
 import ArtistProfile from "./Components/Artist/ArtistProfile/ArtistProfile";
 import OrganizerBookedArtist from "./Components/Organizer/OrganizerBookedArtist/OrganizerBookedArtist";
+
+
 
 function App() {
   axios.defaults.baseURL = "https://stage-lizard.onrender.com/";
@@ -147,5 +154,7 @@ function App() {
     </>
   );
 }
+
+
 
 export default App;
