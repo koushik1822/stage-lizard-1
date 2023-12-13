@@ -10,6 +10,9 @@ const ArtistEvent = () => {
   const [track, setTrack] = useState(false);
   const dayFilter = ["all", 7, 30];
 
+
+  /* unit testing to take place */
+
   useEffect(() => {
     const eventFetch = async () => {
       await axios
